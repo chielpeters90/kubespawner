@@ -1010,7 +1010,7 @@ class KubeSpawner(Spawner):
 
         annotations = self._build_common_annotations({})
 
-        self.pvc_name = self._expand_user_properties('claim-{imagename}-{username}{servername}')
+        self.pvc_name = self._expand_user_properties('claim-{username}-{imagename}{servername}')
 
         return make_pvc(
             name=self.pvc_name,
