@@ -1232,6 +1232,6 @@ class KubeSpawner(Spawner):
             the selected user option
         """
         if 'singleuser_image_spec' in formdata:
-            setattr(self, 'singleuser_image_spec', formdata['singleuser_image_spec'])
+            setattr(self, 'singleuser_image_spec', formdata['singleuser_image_spec'][0])
         return formdata
 
