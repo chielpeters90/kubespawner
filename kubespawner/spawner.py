@@ -1009,9 +1009,9 @@ class KubeSpawner(Spawner):
         labels = self._build_common_labels(self._expand_all(self.user_storage_extra_labels))
 
         annotations = self._build_common_annotations({})
-        self.log.critical(self.pvc_name_template)
-        self.pvc_name = self._expand_user_properties(self.pvc_name_template)
-        self.log.critical(self.pvc_name)
+        pvc_name_template = Unicode('claim-{imagename}-{username}{servername}', config=True, help="")
+        self.pvc_name = self._expand_user_properties(pvc_name_template)
+
         return make_pvc(
             name=self.pvc_name,
             storage_class=self.user_storage_class,
