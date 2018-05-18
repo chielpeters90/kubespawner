@@ -216,7 +216,7 @@ class KubeSpawner(Spawner):
     )
 
     pvc_name_template = Unicode(
-        'claim-{username}{servername}',
+        'claim-{imagename}-{username}{servername}',
         config=True,
         help="""
         Template to use to form the name of user's pvc.
@@ -897,7 +897,8 @@ class KubeSpawner(Spawner):
             userid=self.user.id,
             username=safe_username,
             legacy_escape_username=legacy_escaped_username,
-            servername=servername
+            servername=servername,
+            imagename=''.join([s if s in safe_chars else '-' for s in self.singleuser_image_spec.lower()])
             )
 
     def _expand_all(self, src):
