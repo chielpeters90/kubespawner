@@ -801,28 +801,11 @@ class KubeSpawner(Spawner):
             $('#kubespawner-profiles-list input[type="radio"]').removeClass('form-control');
         });
         </script>
-        <style>
-        /* The profile description should not be bold, even though it is inside the <label> tag */
-        #kubespawner-profiles-list label p {
-            font-weight: normal;
-        }
-        </style>
-
-        <div class='form-group' id='kubespawner-profiles-list'>
-        {% for profile in profile_list %}
-        <label for='profile-item-{{ loop.index0 }}' class='form-control input-group'>
-            <div class='col-md-1'>
-                <input type='radio' name='profile' id='profile-item-{{ loop.index0 }}' value='{{ loop.index0 }}' {% if profile.default %}checked{% endif %} />
-            </div>
-            <div class='col-md-11'>
-                <strong>{{ profile.display_name }}</strong>
-                {% if profile.description %}
-                <p>{{ profile.description }}</p>
-                {% endif %}
-            </div>
-        </label>
-        {% endfor %}
-        </div>
+       <div class="form-group" id='kubespawner-profiles-list'>
+         <label for="singleuser_image_spec">Image</label>
+         <input type="text" class="form-control" id="singleuser_image_spec" aria-describedby="helpsmall" placeholder="HOSTNAME/PROJECT/REPO:TAG">
+        <small id="helpsmall" class="form-text text-muted">Specify the full name of the image here.</small>
+       </div>
         """,
         config=True,
         help="""
@@ -1224,7 +1207,7 @@ class KubeSpawner(Spawner):
         if not self.profile_list:
             return ''
         profile_form_template = Environment(loader=BaseLoader).from_string(self.profile_form_template)
-        return profile_form_template.render(profile_list=self.profile_list)
+        return profile_form_template.render()
 
     def options_from_form(self, formdata):
         """get the option selected by the user on the form
@@ -1248,19 +1231,7 @@ class KubeSpawner(Spawner):
         Returns:
             the selected user option
         """
+        if 'singleuser_image_spec' in formdata:
+            setattr(self, 'singleuser_image_spec', formdata['singleuser_image_spec'])
+        return formdata
 
-        if not self.profile_list:
-            return formdata
-        # Default to first profile if somehow none is provided
-        selected_profile = int(formdata.get('profile', [0])[0])
-        options = self.profile_list[selected_profile]
-        self.log.debug("Applying KubeSpawner override for profile '%s'", options['display_name'])
-        kubespawner_override = options.get('kubespawner_override', {})
-        for k, v in kubespawner_override.items():
-            if callable(v):
-                v = v(self)
-                self.log.debug(".. overriding KubeSpawner value %s=%s (callable result)", k, v)
-            else:
-                self.log.debug(".. overriding KubeSpawner value %s=%s", k, v)
-            setattr(self, k, v)
-        return options
