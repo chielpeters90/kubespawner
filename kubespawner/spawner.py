@@ -1010,6 +1010,8 @@ class KubeSpawner(Spawner):
 
         annotations = self._build_common_annotations({})
         self.pvc_name = self._expand_user_properties(self.pvc_name_template)
+        self.log.critical(self.pvc_name)
+
         return make_pvc(
             name=self.pvc_name,
             storage_class=self.user_storage_class,
