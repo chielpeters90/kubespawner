@@ -802,7 +802,7 @@ class KubeSpawner(Spawner):
         });
         </script>
        <div class="form-group" id='kubespawner-profiles-list'>
-         <label for="singleuser_image_spec">Image</label>
+         <label for="singleuser_image_spec">Image Name</label>
          <input type="text" class="form-control" id="singleuser_image_spec" name="singleuser_image_spec" aria-describedby="helpsmall" placeholder="HOSTNAME/PROJECT/REPO:TAG">
         <small id="helpsmall" class="form-text text-muted">Specify the full name of the image here.</small>
        </div>
