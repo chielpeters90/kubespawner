@@ -798,7 +798,7 @@ class KubeSpawner(Spawner):
         // JupyterHub 0.8 applied form-control indisciminately to all form elements.
         // Can be removed once we stop supporting JupyterHub 0.8
         $(document).ready(function() {
-            $('#image_name2,#image_name1,#image_name3,#custom_image_name').removeClass('form-control');
+            $('#image_name2,#image_name1,#image_name3,#custom_image_name,#node_selector1,#node_selector2').removeClass('form-control');
         });
         </script>
        <div class="form-group">
