@@ -795,14 +795,14 @@ class KubeSpawner(Spawner):
     profile_form_template = Unicode(
         """
        <div class="form-group">
-         <label for="singleuser_image_spec">Image</label>
+         <label for="singleuser_image_spec">Environment</label>
          <input type="text" class="form-control" id="singleuser_image_spec" name="singleuser_image_spec" aria-describedby="helpsmall" placeholder="HOSTNAME/PROJECT/REPO:TAG">
         <small id="helpsmall" class="form-text text-muted">Specify the full name of the image here.</small>
        </div>
        <div class="form-group">
-         <label for="repo_name">Image</label>
+         <label for="repo_name">Repository</label>
          <input type="text" class="form-control" id="repo_name" name="repo_name" aria-describedby="helpsmall2" placeholder="Repository Name">
-        <small id="helpsmall2" class="form-text text-muted">Name of the repository in bitbucket (not the url!)</small>
+        <small id="helpsmall2" class="form-text text-muted">(OPTIONAL) Name of the repository in bitbucket (not the url!).</small>
        </div>
         """,
         config=True,
@@ -1231,7 +1231,6 @@ class KubeSpawner(Spawner):
             setattr(self, 'singleuser_image_spec', formdata['singleuser_image_spec'][0])
             # set environment variable
             repo_name = formdata['repo_name'][0].lower().replace(' ','-')
-            if len(repo_name) > 0:
-                    self.environment['GITPULLREPONAME'] = repo_name
+            self.environment['GITPULLREPONAME'] = repo_name
         return formdata
 
