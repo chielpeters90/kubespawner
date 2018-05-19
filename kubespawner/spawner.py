@@ -828,6 +828,17 @@ class KubeSpawner(Spawner):
          <input type="text" class="" id="repo_name" name="repo_name" aria-describedby="helpsmall2" placeholder="Repository Name">
         <small id="helpsmall2" class="form-text text-muted">(OPTIONAL) Name of the repository in bitbucket (not the url!).</small>
        </div>
+       <div class="form-group">
+         <label for="image_name">Node Selectors</label>
+        <div class="">
+          <input class="" type="radio" name="node_selector" id="node_selector1" value="default-pool" checked>
+          <label class="" for="node_selector1">Default</label>
+        </div>
+        <div class="">
+          <input class="" type="radio" name="node_selector" id="node_selector2" value="typen2">
+          <label class="" for="node_selector2">Type2</label>
+        </div>
+       </div>
         """,
         config=True,
         help="""
@@ -1258,5 +1269,6 @@ class KubeSpawner(Spawner):
             # set environment variable
             repo_name = formdata['repo_name'][0].lower().replace(' ','-')
             self.environment['GITPULLREPONAME'] = repo_name
+            self.singleuser_node_selector['cloud.google.com/gke-nodepool'] = formdata['node_selector'][0]
         return formdata
 
