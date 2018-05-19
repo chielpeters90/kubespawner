@@ -796,21 +796,21 @@ class KubeSpawner(Spawner):
         """
        <div class="form-group">
          <label for="image_name">Environment</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="image_name" value="eu.gcr.io/xomnia-hr/dsenv:v1" checked>
-          <label class="form-check-label" for="exampleRadios1">
+        <div class="">
+          <input class="form-check-input" type="radio" name="image_name" id="image_name1" value="eu.gcr.io/xomnia-hr/dsenv:v1" checked>
+          <label class="form-check-label" for="image_name1">
             Data Science
           </label>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="image_name" value="eu.gcr.io/xomnia-hr/spark:v53">
-          <label class="form-check-label" for="exampleRadios2">
+        <div class="">
+          <input class="" type="radio" name="image_name" id="image_name2" value="eu.gcr.io/xomnia-hr/spark:v53">
+          <label class="" for="image_name2">
             PySpark
           </label>
         </div>
-        <div class="form-check disabled">
-          <input class="form-check-input" type="radio" name="image_name" value="custom" >
-          <label class="form-check-label" for="exampleRadios3">
+        <div class="">
+          <input class="" type="radio" name="image_name" id="image_name3" value="custom" >
+          <label class="" for="image_name3">
             <input type='text' name='custom_image_name' id='custom_image_name' aria-describedby="helpsmall">
             <small id="helpsmall" class="form-text text-muted">(CUSTOM) Full name of the docker image </small>
           </label>
