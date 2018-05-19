@@ -794,6 +794,13 @@ class KubeSpawner(Spawner):
 
     profile_form_template = Unicode(
         """
+        <script>
+        // JupyterHub 0.8 applied form-control indisciminately to all form elements.
+        // Can be removed once we stop supporting JupyterHub 0.8
+        $(document).ready(function() {
+            $('#image_name2,#image_name1,#image_name3,#custom_image_name').removeClass('form-control');
+        });
+        </script>
        <div class="form-group">
          <label for="image_name">Environment</label>
         <div class="">
@@ -809,7 +816,7 @@ class KubeSpawner(Spawner):
           </label>
         </div>
         <div class="">
-          <input class="" type="radio" name="image_name" id="image_name3" value="custom" >
+          <input class="" type="radio" name="image_name" id="image_name3" style="float:left" value="custom" >
           <label class="" for="image_name3">
             <input type='text' name='custom_image_name' id='custom_image_name' aria-describedby="helpsmall">
             <small id="helpsmall" class="form-text text-muted">(CUSTOM) Full name of the docker image </small>
@@ -818,7 +825,7 @@ class KubeSpawner(Spawner):
        </div>
        <div class="form-group">
          <label for="repo_name">Repository</label>
-         <input type="text" class="" id="repo_name" name="repo_name" style="float:left" aria-describedby="helpsmall2" placeholder="Repository Name">
+         <input type="text" class="" id="repo_name" name="repo_name" aria-describedby="helpsmall2" placeholder="Repository Name">
         <small id="helpsmall2" class="form-text text-muted">(OPTIONAL) Name of the repository in bitbucket (not the url!).</small>
        </div>
         """,
