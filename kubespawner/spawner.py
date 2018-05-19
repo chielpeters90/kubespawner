@@ -216,7 +216,7 @@ class KubeSpawner(Spawner):
     )
 
     pvc_name_template = Unicode(
-        'claim-{imagename}-{username}{servername}',
+        'claim-{username}{servername}',
         config=True,
         help="""
         Template to use to form the name of user's pvc.
@@ -802,7 +802,7 @@ class KubeSpawner(Spawner):
         });
         </script>
        <div class="form-group" id='kubespawner-profiles-list'>
-         <label for="singleuser_image_spec">Image Name</label>
+         <label for="singleuser_image_spec">Image</label>
          <input type="text" class="form-control" id="singleuser_image_spec" name="singleuser_image_spec" aria-describedby="helpsmall" placeholder="HOSTNAME/PROJECT/REPO:TAG">
         <small id="helpsmall" class="form-text text-muted">Specify the full name of the image here.</small>
        </div>
@@ -897,8 +897,7 @@ class KubeSpawner(Spawner):
             userid=self.user.id,
             username=safe_username,
             legacy_escape_username=legacy_escaped_username,
-            servername=servername,
-            imagename=''.join([s if s in safe_chars else '-' for s in self.singleuser_image_spec.lower()])
+            servername=servername
             )
 
     def _expand_all(self, src):
@@ -1009,8 +1008,6 @@ class KubeSpawner(Spawner):
         labels = self._build_common_labels(self._expand_all(self.user_storage_extra_labels))
 
         annotations = self._build_common_annotations({})
-
-        self.pvc_name = self._expand_user_properties('claim-{username}-{imagename}{servername}')
 
         return make_pvc(
             name=self.pvc_name,
