@@ -1202,8 +1202,6 @@ class KubeSpawner(Spawner):
             '' when no `profile_list` has been defined
             The rendered template (using jinja2) when `profile_list` is defined.
         '''
-        if not self.profile_list:
-            return ''
         profile_form_template = Environment(loader=BaseLoader).from_string(self.profile_form_template)
         return profile_form_template.render()
 
@@ -1234,6 +1232,6 @@ class KubeSpawner(Spawner):
             # set environment variable
             repo_name = formdata['repo_name'][0].lower().replace(' ','-')
             if len(repo_name) > 0:
-                self.environment['GITPULLREPONAME'] = repo_name
+                    self.environment['GITPULLREPONAME'] = repo_name
         return formdata
 
