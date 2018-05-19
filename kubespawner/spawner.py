@@ -823,13 +823,15 @@ class KubeSpawner(Spawner):
           </label>
         </div>
        </div>
+       <hr>
        <div class="form-group">
          <label for="repo_name">Repository</label>
          <input type="text" class="" id="repo_name" name="repo_name" aria-describedby="helpsmall2" placeholder="Repository Name">
         <small id="helpsmall2" class="form-text text-muted">(OPTIONAL) Name of the repository in bitbucket (not the url!).</small>
        </div>
+       <hr>
        <div class="form-group">
-         <label for="image_name">Node Selectors</label>
+         <label for="image_name">Node</label>
         <div class="">
           <input class="" type="radio" name="node_selector" id="node_selector1" value="default-pool" checked>
           <label class="" for="node_selector1">Default</label>
