@@ -795,9 +795,26 @@ class KubeSpawner(Spawner):
     profile_form_template = Unicode(
         """
        <div class="form-group">
-         <label for="singleuser_image_spec">Environment</label>
-         <input type="text" class="form-control" id="singleuser_image_spec" name="singleuser_image_spec" aria-describedby="helpsmall" placeholder="HOSTNAME/PROJECT/REPO:TAG">
-        <small id="helpsmall" class="form-text text-muted">Specify the full name of the image here.</small>
+         <label for="image_name">Environment</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="image_name" value="eu.gcr.io/xomnia-hr/dsenv:v1" checked>
+          <label class="form-check-label" for="exampleRadios1">
+            Data Science
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="image_name" value="eu.gcr.io/xomnia-hr/spark:v53">
+          <label class="form-check-label" for="exampleRadios2">
+            PySpark
+          </label>
+        </div>
+        <div class="form-check disabled">
+          <input class="form-check-input" type="radio" name="image_name" value="custom" >
+          <label class="form-check-label" for="exampleRadios3">
+            <input type='text' name='custom_image_name' id='custom_image_name' aria-describedby="helpsmall">
+            <small id="helpsmall" class="form-text text-muted">(CUSTOM) Full name of the docker image </small>
+          </label>
+        </div>
        </div>
        <div class="form-group">
          <label for="repo_name">Repository</label>
@@ -1227,8 +1244,10 @@ class KubeSpawner(Spawner):
         Returns:
             the selected user option
         """
-        if 'singleuser_image_spec' in formdata:
-            setattr(self, 'singleuser_image_spec', formdata['singleuser_image_spec'][0])
+        if 'image_name' in formdata:
+            image_name = formdata['image_name'][0]
+            image_name = image_name if image_name != 'custom' else formdata['custom_image_name'][0]
+            setattr(self, 'singleuser_image_spec', image_name)
             # set environment variable
             repo_name = formdata['repo_name'][0].lower().replace(' ','-')
             self.environment['GITPULLREPONAME'] = repo_name
