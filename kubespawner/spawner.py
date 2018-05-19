@@ -1233,5 +1233,10 @@ class KubeSpawner(Spawner):
         """
         if 'singleuser_image_spec' in formdata:
             setattr(self, 'singleuser_image_spec', formdata['singleuser_image_spec'][0])
+            # set environment variable
+            name_tag = formdata['singleuser_image_spec'][0].rsplit('/', 1)[-1]
+            name = name_tag.split(':')[0]
+            self.log.critical(name)
+            self.environment['DOCKERIMAGENAME'] = name
         return formdata
 
