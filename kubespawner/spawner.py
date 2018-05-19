@@ -797,8 +797,8 @@ class KubeSpawner(Spawner):
        <div class="form-group">
          <label for="image_name">Environment</label>
         <div class="">
-          <input class="form-check-input" type="radio" name="image_name" id="image_name1" value="eu.gcr.io/xomnia-hr/dsenv:v1" checked>
-          <label class="form-check-label" for="image_name1">
+          <input class="" type="radio" name="image_name" id="image_name1" value="eu.gcr.io/xomnia-hr/dsenv:v1" checked>
+          <label class="" for="image_name1">
             Data Science
           </label>
         </div>
@@ -818,7 +818,7 @@ class KubeSpawner(Spawner):
        </div>
        <div class="form-group">
          <label for="repo_name">Repository</label>
-         <input type="text" class="form-control" id="repo_name" name="repo_name" aria-describedby="helpsmall2" placeholder="Repository Name">
+         <input type="text" class="" id="repo_name" name="repo_name" style="float:left" aria-describedby="helpsmall2" placeholder="Repository Name">
         <small id="helpsmall2" class="form-text text-muted">(OPTIONAL) Name of the repository in bitbucket (not the url!).</small>
        </div>
         """,
