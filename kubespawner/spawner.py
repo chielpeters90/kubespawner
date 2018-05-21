@@ -840,7 +840,6 @@ class KubeSpawner(Spawner):
           <input class="" type="radio" name="node_selector" id="node_selector2" value="highmem">
           <label class="" for="node_selector2">High Memory</label>
         </div>
-       </div>
         <div class="">
           <input class="" type="radio" name="node_selector" id="node_selector2" value="highcpu">
           <label class="" for="node_selector2">High CPU</label>
