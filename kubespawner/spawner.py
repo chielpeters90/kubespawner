@@ -841,8 +841,12 @@ class KubeSpawner(Spawner):
           <label class="" for="node_selector2">High Memory</label>
         </div>
         <div class="">
-          <input class="" type="radio" name="node_selector" id="node_selector2" value="highcpu">
-          <label class="" for="node_selector2">High CPU</label>
+          <input class="" type="radio" name="node_selector" id="node_selector3" value="highcpu">
+          <label class="" for="node_selector3">High CPU</label>
+        </div>
+        <div class="">
+          <input class="" type="radio" name="node_selector" id="node_selector4" value="gpu">
+          <label class="" for="node_selector4">GPU</label>
         </div>
        </div>
         """,
@@ -1276,5 +1280,8 @@ class KubeSpawner(Spawner):
             repo_name = formdata['repo_name'][0].lower().replace(' ','-')
             self.environment['GITPULLREPONAME'] = repo_name
             self.singleuser_node_selector['cloud.google.com/gke-nodepool'] = formdata['node_selector'][0]
+            if formdata['node_selector'][0] == 'gpu':
+                self.extra_resource_limits['nvidia.com/gpu'] = 1
+
         return formdata
 
